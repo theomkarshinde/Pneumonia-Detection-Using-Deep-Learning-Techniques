@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            background: url('/static/images/admin-bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Admin Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <form action="{{ url_for('set_model') }}" method="POST">
+        <label for="model" style="color: rgb(183, 124, 16);">Select Prediction Model:</label>
+        <select name="model" id="model">
+            <option value="cnn">CNN Model</option>
+            <option value="xgboost">XG Boost model</option>
+            <option value="svm">SVM Model</option>
+            <option value="random_forest">Random Forest Model</option>
+            <option value="rnn">RNN Model</option>
+
+        </select>
+        <button type="submit">Save</button>
+    </form>
+
+
+    <!-- Dashboard Content -->
+    <div class="container mt-5">
+        <div class="dashboard-container text-center p-4">
+            <img src="/static/images/admin-icon.png" class="mb-3" alt="Admin Icon" width="80">
+            <h3>Welcome, Admin</h3>
+            <p class="text-muted">Manage doctors and system settings efficiently.</p>
+        </div>
+        <a href="{{ url_for('register', from_admin='true') }}" class="btn btn-primary mt-3">Register New Doctor</a>
+
+        <div class="dashboard-container p-4">
+            <h4>Registered Doctors</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Specialization</th>
+                        <th>Last Login</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctor in all_doctors %}
+                    <tr>
+                        <td>{{ doctor.doctor_id }}</td>
+                        <td>{{ doctor.name }}</td>
+                        <td>{{ doctor.email }}</td>
+                        <td>{{ doctor.phone }}</td>
+                        <td>{{ doctor.specialization }}</td>
+                        <td>{{ doctor.last_login_str }}</td>
+                        <td>
+                            <a href="{{ url_for('doctor_activities', doctor_id=doctor.doctor_id) }}" class="btn btn-sm btn-info">View Activities</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript to display flash messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <script type="text/javascript">
+      alert("{{ messages[0] }}");
+    </script>
+    {% endif %}
+    {% endwith %}
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('dashboard') }}">Doctor Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('patient_history') }}">Patient History</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('upload_image') }}">Upload X-ray</a></li>
+                    <li class="nav-item"><a class="nav-link text-danger" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="mb-3">
+        <form action="{{ url_for('set_model') }}" method="POST">
+            <label for="model" style="color: rgb(165, 109, 3);">Select Prediction Model:</label>
+            <select name="model" id="model">
+                <option value="cnn">CNN Model</option>
+                <option value="xgboost">XG Boost model</option>
+                <option value="svm">SVM Model</option>
+                <option value="random_forest">Random Forest Model</option>
+                <option value="rnn">RNN Model</option>
+
+            </select>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="container mt-5">
+        <div class="text-center">
+            <h2>Welcome, Dr. {{ session['doctorname'] }}</h2>
+            <p class="lead">Manage your patients and analyze X-ray images.</p>
+        </div>
+        
+        <div class="row mt-4">
+            <!-- Upload X-ray Section -->
+            <div class="col-md-6">
+                <div class="card shadow p-4 text-center">
+                    <img src="/static/images/xray-icon.png" class="mb-3" alt="X-ray Icon" width="80">
+                    <h4>Upload X-ray</h4>
+                    <p>Analyze chest X-rays for pneumonia detection.</p>
+                    <a href="{{ url_for('xray_upload') }}" class="btn btn-primary">Upload Now</a>
+                </div>
+            </div>
+            
+            <!-- Patient History Section -->
+            <div class="col-md-6">
+                <div class="card shadow p-4 text-center">
+                    <img src="/static/images/patient-history-icon.png" class="mb-3" alt="Patient History Icon" width="80">
+                    <h4>View Patient History</h4>
+                    <p>Access past diagnosis and medical records.</p>
+                    <a href="{{ url_for('patient_history') }}" class="btn btn-primary">View History</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2024-25 Pneumonia Detection</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript to display flash messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <script type="text/javascript">
+      alert("{{ messages[0] }}");
+    </script>
+    {% endif %}
+    {% endwith %}
+</body>
+</html>

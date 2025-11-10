@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">Pneumonia Detection System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <div class="container mt-5">
+        <div class="text-center">
+            <h2>About Our Pneumonia Detection System</h2>
+            <p class="lead">Using deep learning to assist in early pneumonia detection from X-ray images.</p>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-5">
+                <img src="/static/images/about-us.jpg" class="img-fluid rounded shadow" alt="About Us">
+            </div>
+            <div class="col-md-6">
+                <p>Our system utilizes state-of-the-art deep learning models to analyze chest X-rays and detect pneumonia with high accuracy. Our goal is to assist medical professionals in making faster and more reliable diagnoses.</p>
+                <p>We provide a platform where doctors can upload X-rays, receive AI-generated diagnoses, and track patient history seamlessly.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2024-25 Pneumonia Detection | <a href="{{ url_for('contact') }}" class="text-light">Contact Us</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
