@@ -1,0 +1,142 @@
+/* styles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #004085;
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+/* Hide scrollbar in WebKit-based browsers */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.upload-section {
+    margin: 80px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+.data-info {
+    margin: 10px;
+    padding: 10px;
+}
+
+.data-info > label {
+    font-weight: bold;
+}
+
+.form-data {
+    display: flex;
+    flex-direction: column;
+    -ms-flex-align: start;
+}
+
+#file-input {
+    margin: 10px 0;
+    padding: 5px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 12px 30px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 170px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.result-section {
+    margin: 80px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+#result-message {
+    font-size: 1.5em;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #004085;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #4CAF50;
+}
+
+nav a[href="{{ url_for('logout') }}"] {
+    color: red;  /* Make the logout link red */
+    font-weight: bold;  /* Make it bold */
+}
+
+nav a[href="{{ url_for('logout') }}"]:hover {
+    color: darkred;  /* Change color on hover */
+}
+
+.btn {
+    width: auto;  /* Removes full-width issue */
+    padding: 10px 20px; /* Adds spacing */
+    display: block;
+    margin: 10px auto; /* Centers button */
+}
